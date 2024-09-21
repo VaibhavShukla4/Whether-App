@@ -1,0 +1,161 @@
+/** @format */
+@font-face {
+  font-family: 'Gilroy-bold';
+  src: url('../../../public/Gilroy-Bold.ttf');
+  /* You can use other format types like 'woff', 'woff2', 'truetype', etc. */
+}
+
+@font-face {
+  font-family: 'Gilroy-Normal';
+  src: url('../../../public/Gilroy-Regular.ttf');
+  /* You can use other format types like 'woff', 'woff2', 'truetype', etc. */
+}
+.landing-container {
+  background: #5d69f6;
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+}
+
+.flex-container {
+  width: 85%;
+  height: -webkit-fill-available;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 100px;
+  row-gap: 20px;
+  justify-content: center;
+}
+
+.forecast-card {
+  border-radius: 7%/5%;
+  background: rgba(255, 255, 255, 0.35);
+  box-shadow: 0px 3.009px 6.017px 0px rgba(255, 255, 255, 0.4) inset,
+    0px -3.009px 9.026px 0px rgba(255, 255, 255, 0.5) inset,
+    0px -1.504px 20.057px 0px rgba(255, 255, 255, 0.24) inset,
+    0px 20.057px 20.057px 0px rgba(255, 255, 255, 0.24) inset,
+    0px 1.003px 20.559px 0px rgba(255, 255, 255, 0.8) inset;
+  backdrop-filter: blur(10.028538703918457px);
+  width: 450px;
+  height: 600px;
+  background: #ffffff59;
+  text-align: center;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 10px;
+  padding-inline: 15px;
+}
+
+.forecast-img {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  padding: 20px;
+}
+.forecast-img > img {
+  border-radius: 50%;
+  width: 150px;
+}
+
+.forecast-card > #number {
+  font-weight: 700;
+  font-size: 95px;
+  font-family: Gilroy-bold;
+}
+
+.forecast-card > .bold {
+  font-weight: 700;
+  font-family: Gilroy-bold;
+  font-size: 30px;
+}
+
+.forecast-card > .text {
+  font-weight: 400;
+  font-family: Gilroy-Normal;
+  font-size: 30px;
+}
+
+.forecast-card > p {
+  font-family: sans-serif;
+}
+
+.land-btn {
+  padding: 0.8em 1.8em;
+  border: 2px solid #fff;
+  position: relative;
+  overflow: hidden;
+  background-color: #5d69f6;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 16px;
+  transition: 0.3s;
+  z-index: 1;
+  font-family: inherit;
+  color: #fff;
+  margin-inline: auto;
+  width: fit-content;
+  font-family: Gilroy-bold;
+  border-radius: 5px;
+}
+
+.land-btn::before {
+  content: '';
+  width: 0;
+  height: 300%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  background: #00a3ff;
+  transition: 0.5s ease;
+  display: block;
+  z-index: -1;
+}
+
+.land-btn:hover::before {
+  width: 105%;
+}
+
+/* button:hover {
+  color: #111;
+} */
+
+@media (max-width: 1200px) {
+  .flex-container {
+    flex-wrap: wrap;
+    justify-content: center;
+    width: -webkit-fill-available;
+    padding-inline: 30px;
+  }
+}
+
+@media (max-width: 767px) {
+  .forecast-img {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .forecast-card {
+    height: 500px;
+  }
+
+  .forecast-card > #number {
+    font-size: 45px;
+  }
+
+  .forecast-card > .bold {
+    font-size: 20px;
+  }
+
+  .forecast-img > img {
+    width: 100px;
+  }
+}
+
+@media (max-width: 425px) {
+  .forecast-card {
+    height: 400px;
+  }
+}

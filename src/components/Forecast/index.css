@@ -1,0 +1,28 @@
+/** @format */
+.forecast {
+  display: flex;
+  align-items: center;
+  height: -webkit-fill-available;
+  column-gap: 25px;
+  overflow: auto;
+}
+
+.forecast-slider > img {
+  width: 70px;
+}
+
+.forecast-slider > .day {
+  font-family: Inter;
+  font-size: 20px;
+}
+
+.forecast-slider {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  text-align: center;
+  padding: 20px;
+  background: #272727;
+  border-radius: 20px;
+  width: fit-content;
+}
