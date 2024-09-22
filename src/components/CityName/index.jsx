@@ -1,41 +1,96 @@
 /** @format */
 
-import React from 'react';
+import React, { useState } from 'react';
 import './index.css';
 import Map from './../../assets/svg/map.svg';
 import Raining from './../../assets/svg/heavy-rain.svg';
 import Unit from '../Unit';
-const CityName = () => {
+import { convertUnixToLocalTime } from '../../utils/convertUnixToLocalTime';
+import { celsiusToFahrenheit } from '../../utils/celsiusToFahrenheit ';
+
+// Helper function to convert Celsius to Fahrenheit
+
+const CityName = ({ weatherData }) => {
+  // State to track if the temperature is in Celsius or Fahrenheit
+  const [isCelsius, setIsCelsius] = useState(false);
+
+  // Function to toggle between Celsius and Fahrenheit
+  const toggleTemperatureUnit = () => {
+    setIsCelsius(!isCelsius);
+  };
+
+  // Rounding the temperature values to the nearest integer
+  const tempMax = isCelsius
+    ? Math.round(weatherData?.main?.temp_max)
+    : celsiusToFahrenheit(weatherData?.main?.temp_max);
+  const tempMin = isCelsius
+    ? Math.round(weatherData?.main?.temp_min)
+    : celsiusToFahrenheit(weatherData?.main?.temp_min);
+  const feelsLike = isCelsius
+    ? Math.round(weatherData?.main?.feels_like)
+    : celsiusToFahrenheit(weatherData?.main?.feels_like);
+
+  if (
+    !weatherData ||
+    !weatherData.weather ||
+    weatherData.weather.length === 0
+  ) {
+    return <p>Loading weather data...</p>;
+  }
+
+  const { weather, name, dt, timezone } = weatherData;
+  const weatherIcon = weather[0].icon;
+
+  // Construct the URL for the weather icon
+  const iconUrl = `http://openweathermap.org/img/wn/${weatherIcon}@2x.png`;
+
+  // Convert dt (Unix timestamp) to local date and time
+  const { day, formattedDate } = convertUnixToLocalTime(dt, timezone);
+
   return (
     <div className="w-full">
       <div className="flex-container-card">
         <div className="current-city">
           <img src={Map} alt="" />
-          <span>Dhaka, Bangladesh</span>
+          <span>
+            {weatherData?.name}, {weatherData?.sys?.country}
+          </span>
         </div>
-        <Unit />
+        <Unit
+          isCelsius={isCelsius}
+          toggleTemperatureUnit={toggleTemperatureUnit}
+        />
       </div>
       <div className="flex-container-card">
         <div className="date">
-          <span className="day">Sunday</span>
-          <span className="date">04 Aug,2024</span>
+          <span className="day">{day ? day : 'Sunday'}</span>
+          <span className="date">{formattedDate}</span>
         </div>
         <div className="date">
-          <span className="day">28°C</span>
-          <span className="date">High: 27 Low: 10</span>
+          <span className="day">
+            {feelsLike}°{isCelsius ? 'C' : 'F'}
+          </span>
+          <span className="date">
+            High: {tempMax}°{isCelsius ? 'C' : 'F'} Low: {tempMin}°
+            {isCelsius ? 'C' : 'F'}
+          </span>
         </div>
-        {/* <div className="date">
-          <img src={Raining} alt="" />
-          <span className="date">High: 27 Low: 10</span>
-        </div> */}
       </div>
       <div className="flex-container-card">
         <div className="date">
-          <img src={Raining} alt="" />
+          <img src={iconUrl ? iconUrl : Raining} alt="" />
         </div>
         <div className="date">
-          <span className="day">28°C</span>
-          <span className="date">High: 27 Low: 10</span>
+          <span
+            className="day"
+            style={{ fontSize: '20px', textTransform: 'capitalize' }}
+          >
+            {weatherData?.weather[0]?.description}
+          </span>
+          <span className="date">
+            {' '}
+            {feelsLike}°{isCelsius ? 'C' : 'F'}
+          </span>
         </div>
       </div>
     </div>

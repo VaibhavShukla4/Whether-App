@@ -27,7 +27,7 @@
 }
 
 .sidebar-height {
-  height: 100vh;
+  height: -webkit-fill-available;
 }
 
 .display-none {
@@ -267,7 +267,7 @@
 }
 
 .mm-active {
-  height: 60%;
+  height: 50%;
 }
 
 .theme-btn-center {

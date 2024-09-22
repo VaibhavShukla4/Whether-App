@@ -26,3 +26,35 @@
   border-radius: 20px;
   width: fit-content;
 }
+
+.top-heading {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.top-heading > .title {
+  font-family: Inter-Normal;
+  font-size: 20px;
+  margin: 10px;
+}
+
+.city-selector {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.city-selector > span {
+  font-family: Inter-Normal;
+  cursor: pointer;
+}
+
+.active {
+  color: red !important; /* Corrected the typo */
+  font-weight: 700; /* Optional: To make it bold */
+}

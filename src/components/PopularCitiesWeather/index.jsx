@@ -1,8 +1,7 @@
 /** @format */
 
 import React, { useEffect, useState } from 'react';
-import './index.css';
-import { fetchWeatherData } from '../../services/weatherService';
+import { fetchWeatherData } from './../../services/weatherService';
 
 // List of popular cities
 const popularCities = [
@@ -15,7 +14,7 @@ const popularCities = [
   { city: 'Mumbai', country: 'IN' },
 ];
 
-const Countries = () => {
+const PopularCitiesWeather = () => {
   const [weatherData, setWeatherData] = useState([]);
 
   // Fetch weather data for each city
@@ -35,25 +34,25 @@ const Countries = () => {
   }, []);
 
   return (
-    <div className="highlight-card card-height overflow-auto">
-      <span className="title">Popular Cities</span>
-      {weatherData?.map((weather) => (
-        <div key={weather.city} className="countries-card">
-          <div className="state">
-            <span className="name small-text">{weather.country}</span>
-            <span className="name">{weather.city}</span>
-            <span className="name small-text">{weather.description}</span>
+    <div className="popular-cities-weather">
+      <h1>Popular Cities Weather</h1>
+      <div className="weather-list">
+        {weatherData.map((weather) => (
+          <div key={weather.city} className="weather-card">
+            <h2>
+              {weather.city}, {weather.country}
+            </h2>
+            <img
+              src={`http://openweathermap.org/img/wn/${weather.icon}@2x.png`}
+              alt={weather.description}
+            />
+            <p>{weather.temperature}°C</p>
+            <p>{weather.description}</p>
           </div>
-          <img
-            className="condition"
-            src={`http://openweathermap.org/img/wn/${weather.icon}@2x.png`}
-            alt={weather.description}
-          />
-          <span className="name">{Math.round(weather.temperature)}°C</span>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 };
 
-export default Countries;
+export default React.memo(PopularCitiesWeather);

@@ -32,6 +32,9 @@
   padding-left: 101px;
   width: 100%;
   transition: 0.3s;
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
 
 /* today 27/07/2023 */

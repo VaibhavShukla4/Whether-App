@@ -3,11 +3,12 @@
 import React, { useState } from 'react';
 import './index.css';
 
-function Unit() {
-  const [checked, setChecked] = useState(false);
+function Unit({ isCelsius, toggleTemperatureUnit }) {
+  const [checked, setChecked] = useState(isCelsius);
 
   const handleCheckboxChange = () => {
     setChecked(!checked);
+    toggleTemperatureUnit();
   };
 
   return (

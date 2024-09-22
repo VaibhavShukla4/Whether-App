@@ -18,7 +18,7 @@ const Sidebar = ({
   const [active, setActive] = useState('');
   const navData = [
     {
-      title: 'Dashboard',
+      title: 'Home',
       route: '',
       Icon: Dashboard,
     },

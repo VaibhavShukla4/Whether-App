@@ -34,6 +34,7 @@
   height: 70px;
   padding-inline: 50px;
   margin: 10px 0px;
+  position: relative;
 }
 
 .page-topbar.header-scrolled {
@@ -181,8 +182,14 @@ button:not(:disabled) {
   position: relative;
 }
 
+#page-topbar-hide {
+  position: relative;
+}
+
 .navbar-header .dropdown {
-  position: static;
+  position: absolute;
+  background: white;
+  bottom: -23px;
 }
 
 .navbar-header .dropdown .dropdown-menu {
@@ -307,6 +314,7 @@ button:not(:disabled) {
   border-radius: 30px;
   column-gap: 20px;
   width: 30%;
+  margin-left: 15px;
 }
 
 .input-box > input {
@@ -317,6 +325,7 @@ button:not(:disabled) {
   width: -webkit-fill-available;
   font-family: 'Inter';
   font-size: 16px;
+  color: white;
 }
 
 /* .input-box > input:focus-visible {
@@ -337,9 +346,24 @@ button:not(:disabled) {
 }
 
 /* here use media query */
+
+@media (max-width: 1400px) {
+  .input-box {
+    width: 50%;
+  }
+}
 @media (max-width: 991px) {
   .logo span.logo-sm {
     display: inline-block;
+  }
+  .input-box {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 992px) {
+  .navbar-header {
+    padding-inline: 65px;
   }
 }
 
@@ -367,6 +391,10 @@ button:not(:disabled) {
   .header-item {
     padding: 0px 38px;
   }
+
+  .input-box {
+    width: 70%;
+  }
 }
 
 @media (max-width: 700px) {
@@ -380,6 +408,10 @@ button:not(:disabled) {
     left: 10px !important;
     right: 10px !important;
     transform: translate3d(15px, 70px, 0px);
+  }
+
+  .input-box {
+    width: 100%;
   }
 }
 
@@ -412,6 +444,7 @@ button:not(:disabled) {
 
 @media (max-width: 375px) {
   .navbar-header {
-    padding: 0 0px 0 0;
+    padding: 5px;
+    display: block;
   }
 }

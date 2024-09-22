@@ -12,6 +12,7 @@
 .highlight-card > .title {
   font-family: Inter-Normal;
   font-size: 20px;
+  margin: 10px;
 }
 
 .card-col {
@@ -62,4 +63,28 @@
 
 .items-center {
   align-items: center;
+}
+
+@media (max-width: 991px) {
+  .card-col {
+    grid-column: span 6;
+  }
+
+  .card-row {
+    grid-column: span 6;
+  }
+}
+
+@media (max-width: 580px) {
+  .card-col {
+    grid-column: span 12;
+  }
+
+  .card-row {
+    grid-column: span 12;
+  }
+
+  .card-grid {
+    padding: 10px 0px;
+  }
 }
