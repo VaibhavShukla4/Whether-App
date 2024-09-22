@@ -17,7 +17,7 @@ function Unit({ isCelsius, toggleTemperatureUnit }) {
         <input
           type="checkbox"
           className="checkbox"
-          checked={checked}
+          checked={!checked}
           onChange={handleCheckboxChange}
         />
         <div className="knobs"></div>

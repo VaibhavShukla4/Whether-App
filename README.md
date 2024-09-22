@@ -1,3 +1,5 @@
+<!-- @format -->
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -68,3 +70,68 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+Weather Forecast Application
+A web-based weather forecast application that provides detailed weather conditions for cities around the world. Users can search for any city to get current weather conditions such as temperature, wind status, humidity, visibility, sunrise/sunset times, and a 5-day weather forecast. The app also provides a list of popular cities for quick weather lookups.
+
+Features
+Search Functionality: Search for weather information by city name.
+Current Weather: Displays detailed current weather conditions including temperature, wind speed, UV index, visibility, humidity, and more.
+Popular Cities: Predefined popular cities section allows quick weather lookups.
+5-Day Forecast: Shows a 5-day weather forecast for the selected city.
+Unit Conversion: Toggle between Fahrenheit and Celsius.
+Theme Support: Light/Dark theme toggle.
+Technologies Used
+React.js: The frontend is built using React for fast and efficient UI rendering.
+OpenWeather API: Used to fetch real-time weather data for cities.
+CSS: Custom styling for the UI layout and weather cards.
+
+Technologies Used
+React.js: For building the user interface and managing state.
+CSS: For styling the app.
+react-router-dom: For managing routing and navigation between components.
+
+Installation
+Prerequisites
+Node.js (v14 or later)
+npm (Node Package Manager) or yarn
+
+Steps to Set Up Locally
+
+1. Clone the repository:
+
+git clone https://github.com/your-username/weather-app.git
+cd weather-app
+
+2. Install dependencies:
+   npm install
+   or if you're using yarn:
+   yarn install
+3. Set up your environment variables: Create a .env file in the root of your project and add your API key from OpenWeather:
+   REACT_APP_WEATHER_API_KEY=your_openweather_api_key
+
+4. Start the application:
+   npm start
+   or with yarn:
+   yarn start
+
+5. Access the app: Once the project is running, open your browser and go to http://localhost:3000 to view the app.
+
+Assumptions Made During Development
+The app fetches data from the OpenWeather API, and it assumes that the API is available and functional.
+The application assumes that the city names entered are spelled correctly and exist in the OpenWeather API database.
+The 5-day weather forecast is shown based on the data provided by OpenWeather, which may sometimes be in 3-hour intervals.
+How to Use the Application
+Search for a city: Enter the name of the city in the search bar at the top. The app will fetch and display the current weather information for that city.
+Popular Cities: You can click on any of the predefined popular cities listed below the search bar to instantly get weather updates.
+View the forecast: Once you search or select a city, the app will display the current weather and a 5-day forecast.
+Toggle temperature units: Use the unit toggle (Fahrenheit/Celsius) next to the temperature to switch between units.
+Dark Mode: Use the theme toggle on the left sidebar to switch between light and dark modes.
+API Reference
+OpenWeather API: The application uses the OpenWeather API to fetch weather data. You will need an API key to access the weather data. Sign up for a free API key here.
+Future Enhancements
+Geolocation: Add the ability for users to allow the app to detect their location and automatically display the weather.
+Hourly Forecast: Display more granular weather data, such as hourly updates for the current day.
+Error Handling: Improve the handling of invalid city searches or API errors.
+
+Also i have use countriesnow for cities dropdown suggestion

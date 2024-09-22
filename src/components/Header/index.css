@@ -191,6 +191,10 @@ button:not(:disabled) {
   background: white;
   bottom: -23px;
   margin-left: 18px;
+  height: 120px;
+  top: 65px;
+  z-index: 1;
+  overflow: auto;
 }
 
 .navbar-header .dropdown .dropdown-menu {
