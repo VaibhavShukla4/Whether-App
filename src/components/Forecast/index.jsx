@@ -40,7 +40,9 @@ const Forecast = () => {
   return (
     <div className="highlight-card card-height overflow-auto">
       <div className="top-heading">
-        <span className="title">5 Day Forecast for {city}</span>
+        <span className="title">
+          5 Day Forecast for <span style={{ color: 'red' }}>{city}</span>
+        </span>
         {/* Render today's forecast separately */}
         <div className="city-selector">
           {popularCities.map((cityObj, index) => (

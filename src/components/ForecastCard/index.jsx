@@ -1,7 +1,7 @@
 /** @format */
 
 import React from 'react';
-
+import './index.css';
 const ForecastCard = ({ forecastData }) => {
   const todayDate = new Date();
   todayDate.setHours(0, 0, 0, 0);

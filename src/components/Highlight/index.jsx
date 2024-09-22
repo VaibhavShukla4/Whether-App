@@ -7,15 +7,15 @@ import Humidity from './../../assets/svg/humidity.svg';
 import Sunrise from './../../assets/svg/sunrise.svg';
 import UV from './../../assets/svg/uv.svg';
 import Visibility from './../../assets/svg/eye.svg';
-import WeatherInfo from '../WeatherInfo';
 import { convertUnixToTime } from '../../utils/convertUnixToTime';
 import { fetchUVIndex } from './../../services/weatherService';
+
 const Highlight = ({ weatherData }) => {
   const [uvIndex, setUvIndex] = useState(null);
 
-  // Always declare hooks at the top of the component
+  // Fetch UV index data
   useEffect(() => {
-    if (!weatherData || !weatherData.coord) return; // Avoid making the request if data is missing
+    if (!weatherData || !weatherData.coord) return;
 
     const lat = weatherData.coord.lat;
     const lon = weatherData.coord.lon;
@@ -32,29 +32,40 @@ const Highlight = ({ weatherData }) => {
     getUVIndex();
   }, [weatherData]);
 
-  // Return early only after hooks are declared
-  if (!weatherData || !weatherData.sys || !weatherData.coord) {
+  // Return early if necessary data is missing
+  if (
+    !weatherData ||
+    !weatherData.sys ||
+    !weatherData.coord ||
+    !weatherData.dt
+  ) {
     return <p>Loading weather data...</p>;
   }
 
-  const { timezone, visibility, sys, name } = weatherData;
+  const { timezone, visibility, sys, name, dt } = weatherData;
   const { sunrise, sunset } = sys;
-  console.log(weatherData?.main?.humidity);
+
+  // Convert dt (timestamp) to the local time (e.g., 9:00 AM)
+  const currentWeatherTime = convertUnixToTime(dt, timezone); // This will convert timestamp to time based on timezone
+
   return (
     <div className="highlight-card">
       <span className="title">Today’s Highlight</span>
-      {/* <WeatherInfo weatherData={weatherData} /> */}
       <div className="card-grid">
+        {/* Wind Status */}
         <div className="card-col">
           <div className="d-flex">
             <img src={Wind} alt="" />
             <span className="name">Wind Status</span>
           </div>
           <span className="name">
-            7.90 <span className="name">km/h</span>
+            {weatherData?.wind?.speed} <span className="name">km/h</span>
           </span>
-          <span className="name small-text">9:00 AM</span>
+          <span className="name small-text">{currentWeatherTime}</span>{' '}
+          {/* Display current time */}
         </div>
+
+        {/* Humidity */}
         <div className="card-col">
           <div className="d-flex">
             <img src={Humidity} alt="" />
@@ -65,6 +76,8 @@ const Highlight = ({ weatherData }) => {
           </span>
           <span className="name small-text">Humidity is good</span>
         </div>
+
+        {/* Sunrise */}
         <div className="card-row">
           <div className="d-flex items-center">
             <img src={Sunrise} alt="" />
@@ -76,17 +89,21 @@ const Highlight = ({ weatherData }) => {
             </div>
           </div>
         </div>
+
+        {/* UV Index */}
         <div className="card-col">
           <div className="d-flex">
             <img src={UV} alt="" />
             <span className="name">UV Index</span>
           </div>
           <span className="name">
-            {uvIndex !== null ? uvIndex : 'Loading...'}
+            {uvIndex !== null ? uvIndex : 'Loading...'}{' '}
             <span className="name">UV</span>
           </span>
           <span className="name small-text">Moderate UV</span>
         </div>
+
+        {/* Visibility */}
         <div className="card-col">
           <div className="d-flex">
             <img src={Visibility} alt="" />
@@ -95,8 +112,11 @@ const Highlight = ({ weatherData }) => {
           <span className="name">
             {visibility / 1000} <span className="name">km</span>
           </span>
-          <span className="name small-text">9:00 AM</span>
+          <span className="name small-text">{currentWeatherTime}</span>{' '}
+          {/* Display current time */}
         </div>
+
+        {/* Sunset */}
         <div className="card-row">
           <div className="d-flex items-center">
             <img src={Sunrise} alt="" />

@@ -345,6 +345,10 @@ button:not(:disabled) {
   }
 }
 
+.small-device-theme {
+  display: none;
+}
+
 /* here use media query */
 
 @media (max-width: 1400px) {
@@ -364,6 +368,10 @@ button:not(:disabled) {
 @media (max-width: 992px) {
   .navbar-header {
     padding-inline: 65px;
+  }
+
+  .small-device-theme {
+    display: block;
   }
 }
 
@@ -409,7 +417,14 @@ button:not(:disabled) {
     right: 10px !important;
     transform: translate3d(15px, 70px, 0px);
   }
-
+  header {
+    height: 120px;
+  }
+  .navbar-header {
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
   .input-box {
     width: 100%;
   }
@@ -445,6 +460,5 @@ button:not(:disabled) {
 @media (max-width: 375px) {
   .navbar-header {
     padding: 5px;
-    display: block;
   }
 }

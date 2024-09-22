@@ -14,6 +14,7 @@ const Sidebar = ({
   setisOpen,
   setIsChecked,
   isChecked,
+  handleToggle,
 }) => {
   const [active, setActive] = useState('');
   const navData = [
@@ -24,10 +25,6 @@ const Sidebar = ({
     },
   ];
   const handleClick = () => {};
-
-  const handleToggle = () => {
-    setIsChecked(!isChecked);
-  };
 
   return (
     <>
@@ -71,21 +68,6 @@ const Sidebar = ({
           <div className="theme-btn-center">
             <Theme handleToggle={handleToggle} isChecked={isChecked} />
           </div>
-          {/* <div
-            className={`${isOpen ? 'logout-section' : 'logout-section-hide'}`}
-          >
-            <div
-              className={`${
-                isOpen ? 'logout-alignment' : 'logout-alignment-hide'
-              }`}
-            >
-              <span className="d-flex" style={{ cursor: 'pointer' }}>
-                <span className={`${isOpen ? 'logout-text' : 'display-none'}`}>
-                  Logout
-                </span>
-              </span>
-            </div>
-          </div> */}
         </div>
       </div>
       {showSidebar ? (
@@ -121,7 +103,6 @@ const Sidebar = ({
                   // onClick={handleLogout}
                 >
                   <span className="logout-text">Logout</span>
-                  {/* <img src={Logout} alt="Logout" /> */}
                 </span>
               </div>
             </div>

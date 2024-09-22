@@ -3,7 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import './index.css'; // Create a separate CSS file for header styles
 import Search from './../../assets/svg/search.svg';
-const Header = ({ isOpen, loading, onCitySelect, error, weatherData }) => {
+import Theme from '../Theme/Index';
+const Header = ({ isOpen, loading, onCitySelect, isChecked, handleToggle }) => {
   const [query, setQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -19,7 +20,6 @@ const Header = ({ isOpen, loading, onCitySelect, error, weatherData }) => {
     'Paris',
     'Toronto',
   ];
-  const handleToggleSidebar = () => {};
 
   const handleInputChange = (e) => {
     const value = e.target.value;
@@ -62,6 +62,9 @@ const Header = ({ isOpen, loading, onCitySelect, error, weatherData }) => {
             className="search-input"
           />
         </div>
+        <div className="small-device-theme">
+          <Theme handleToggle={handleToggle} isChecked={isChecked} />
+        </div>
         {showDropdown && (
           <ul className="dropdown">
             {suggestions.length > 0 ? (
@@ -79,22 +82,6 @@ const Header = ({ isOpen, loading, onCitySelect, error, weatherData }) => {
             )}
           </ul>
         )}
-        {/* {loading ? (
-          <p>Loading...</p>
-        ) : error ? (
-          <p>{error}</p>
-        ) : weatherData ? (
-          <div className="weather-info">
-            <h2>{weatherData.name}</h2>
-            <p>Temperature: {weatherData.main.temp} °C</p>
-            <p>Weather: {weatherData.weather[0].description}</p>
-          </div>
-        ) : (
-          <p>Search for a city to see the weather.</p>
-        )} */}
-        <div className="d-flex header-right">
-          <span>{/* <img src={Notifi} className="notification" /> */}</span>
-        </div>
       </div>
     </header>
   );

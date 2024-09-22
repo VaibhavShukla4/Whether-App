@@ -41,6 +41,12 @@
   margin: 10px;
 }
 
+.title > span {
+  font-family: Inter;
+  font-size: 20px;
+  color: red;
+}
+
 .city-selector {
   display: flex;
   flex-wrap: wrap;

@@ -37,7 +37,6 @@ function App() {
       }
     }
   };
-  console.log(weatherData);
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
@@ -47,7 +46,6 @@ function App() {
           <Layout weatherData={weatherData} onCitySelect={handleCitySelect} />
         }
       >
-        {/* <Route index element={<Home />} /> */}
         <Route path="home" element={<Home weatherData={weatherData} />} />
       </Route>
       <Route path="*" element={<NotFoundPage />} />
