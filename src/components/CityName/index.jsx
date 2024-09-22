@@ -7,10 +7,11 @@ import Raining from './../../assets/svg/heavy-rain.svg';
 import Unit from '../Unit';
 import { convertUnixToLocalTime } from '../../utils/convertUnixToLocalTime';
 import { celsiusToFahrenheit } from '../../utils/celsiusToFahrenheit ';
+import CardSkeleton from '../CardSkeleton';
 
 // Helper function to convert Celsius to Fahrenheit
 
-const CityName = ({ weatherData }) => {
+const CityName = ({ weatherData, loading }) => {
   // State to track if the temperature is in Celsius or Fahrenheit
   const [isCelsius, setIsCelsius] = useState(false);
 
@@ -35,7 +36,7 @@ const CityName = ({ weatherData }) => {
     !weatherData.weather ||
     weatherData.weather.length === 0
   ) {
-    return <p>Loading weather data...</p>;
+    return <CardSkeleton />;
   }
 
   const { weather, name, dt, timezone } = weatherData;
@@ -48,52 +49,58 @@ const CityName = ({ weatherData }) => {
   const { day, formattedDate } = convertUnixToLocalTime(dt, timezone);
 
   return (
-    <div className="w-full">
-      <div className="flex-container-card">
-        <div className="current-city">
-          <img src={Map} alt="" />
-          <span>
-            {weatherData?.name}, {weatherData?.sys?.country}
-          </span>
+    <>
+      {loading ? (
+        <CardSkeleton />
+      ) : (
+        <div className="w-full">
+          <div className="flex-container-card">
+            <div className="current-city">
+              <img src={Map} alt="" />
+              <span>
+                {weatherData?.name}, {weatherData?.sys?.country}
+              </span>
+            </div>
+            <Unit
+              isCelsius={isCelsius}
+              toggleTemperatureUnit={toggleTemperatureUnit}
+            />
+          </div>
+          <div className="flex-container-card">
+            <div className="date">
+              <span className="day">{day ? day : 'Sunday'}</span>
+              <span className="date">{formattedDate}</span>
+            </div>
+            <div className="date">
+              <span className="day">
+                {feelsLike}°{isCelsius ? 'C' : 'F'}
+              </span>
+              <span className="date">
+                High: {tempMax}°{isCelsius ? 'C' : 'F'} Low: {tempMin}°
+                {isCelsius ? 'C' : 'F'}
+              </span>
+            </div>
+          </div>
+          <div className="flex-container-card">
+            <div className="date">
+              <img src={iconUrl ? iconUrl : Raining} alt="" />
+            </div>
+            <div className="date">
+              <span
+                className="day"
+                style={{ fontSize: '20px', textTransform: 'capitalize' }}
+              >
+                {weatherData?.weather[0]?.description}
+              </span>
+              <span className="date">
+                {' '}
+                {feelsLike}°{isCelsius ? 'C' : 'F'}
+              </span>
+            </div>
+          </div>
         </div>
-        <Unit
-          isCelsius={isCelsius}
-          toggleTemperatureUnit={toggleTemperatureUnit}
-        />
-      </div>
-      <div className="flex-container-card">
-        <div className="date">
-          <span className="day">{day ? day : 'Sunday'}</span>
-          <span className="date">{formattedDate}</span>
-        </div>
-        <div className="date">
-          <span className="day">
-            {feelsLike}°{isCelsius ? 'C' : 'F'}
-          </span>
-          <span className="date">
-            High: {tempMax}°{isCelsius ? 'C' : 'F'} Low: {tempMin}°
-            {isCelsius ? 'C' : 'F'}
-          </span>
-        </div>
-      </div>
-      <div className="flex-container-card">
-        <div className="date">
-          <img src={iconUrl ? iconUrl : Raining} alt="" />
-        </div>
-        <div className="date">
-          <span
-            className="day"
-            style={{ fontSize: '20px', textTransform: 'capitalize' }}
-          >
-            {weatherData?.weather[0]?.description}
-          </span>
-          <span className="date">
-            {' '}
-            {feelsLike}°{isCelsius ? 'C' : 'F'}
-          </span>
-        </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 

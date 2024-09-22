@@ -190,6 +190,7 @@ button:not(:disabled) {
   position: absolute;
   background: white;
   bottom: -23px;
+  margin-left: 18px;
 }
 
 .navbar-header .dropdown .dropdown-menu {

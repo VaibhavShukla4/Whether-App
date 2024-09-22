@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import './index.css';
 import { fetchWeatherData } from '../../services/weatherService';
+import CardSkeleton from '../CardSkeleton';
 
 // List of popular cities
 const popularCities = [
@@ -17,9 +18,11 @@ const popularCities = [
 
 const Countries = () => {
   const [weatherData, setWeatherData] = useState([]);
+  const [loading, setLoading] = useState(true); // Add loading state
 
   // Fetch weather data for each city
   const fetchAllWeatherData = async () => {
+    setLoading(true); // Start loading
     const data = await Promise.all(
       popularCities.map(async (cityObj) => {
         const result = await fetchWeatherData(cityObj.city, cityObj.country);
@@ -27,6 +30,7 @@ const Countries = () => {
       }),
     );
     setWeatherData(data.filter((item) => item !== null)); // Filter out any null results (error handling)
+    setLoading(false); // Stop loading
   };
 
   // Fetch data when the component mounts
@@ -37,21 +41,28 @@ const Countries = () => {
   return (
     <div className="highlight-card card-height overflow-auto">
       <span className="title">Popular Cities</span>
-      {weatherData?.map((weather) => (
-        <div key={weather.city} className="countries-card">
-          <div className="state">
-            <span className="name small-text">{weather.country}</span>
-            <span className="name">{weather.city}</span>
-            <span className="name small-text">{weather.description}</span>
+      {loading ? ( // Show loading skeleton while data is fetching
+        <>
+          {/* Render multiple skeleton cards while loading */}
+          <CardSkeleton />
+        </>
+      ) : (
+        weatherData.map((weather) => (
+          <div key={weather.city} className="countries-card">
+            <div className="state">
+              <span className="name small-text">{weather.country}</span>
+              <span className="name">{weather.city}</span>
+              <span className="name small-text">{weather.description}</span>
+            </div>
+            <img
+              className="condition"
+              src={`http://openweathermap.org/img/wn/${weather.icon}@2x.png`}
+              alt={weather.description}
+            />
+            <span className="name">{Math.round(weather.temperature)}°C</span>
           </div>
-          <img
-            className="condition"
-            src={`http://openweathermap.org/img/wn/${weather.icon}@2x.png`}
-            alt={weather.description}
-          />
-          <span className="name">{Math.round(weather.temperature)}°C</span>
-        </div>
-      ))}
+        ))
+      )}
     </div>
   );
 };

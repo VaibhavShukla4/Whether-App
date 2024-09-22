@@ -7,14 +7,14 @@ import Highlight from '../../components/Highlight';
 import Countries from '../../components/Countries';
 import Forecast from '../../components/Forecast';
 
-const Home = ({ weatherData }) => {
+const Home = ({ weatherData, loading }) => {
   return (
     <div className="grid-container">
       <div className="item1">
-        <CityName weatherData={weatherData} />
+        <CityName weatherData={weatherData} loading={loading} />
       </div>
       <div className="item2">
-        <Highlight weatherData={weatherData} />
+        <Highlight weatherData={weatherData} loading={loading} />
       </div>
       <div className="item3">
         <Countries />

@@ -43,10 +43,17 @@ function App() {
       <Route
         path="/"
         element={
-          <Layout weatherData={weatherData} onCitySelect={handleCitySelect} />
+          <Layout
+            weatherData={weatherData}
+            onCitySelect={handleCitySelect}
+            loading={loading}
+          />
         }
       >
-        <Route path="home" element={<Home weatherData={weatherData} />} />
+        <Route
+          path="home"
+          element={<Home loading={loading} weatherData={weatherData} />}
+        />
       </Route>
       <Route path="*" element={<NotFoundPage />} />
     </Routes>

@@ -6,7 +6,7 @@ import Sidebar from '../../components/SideBar';
 import './index.css';
 import { Outlet } from 'react-router-dom';
 
-const Layout = ({ onCitySelect, weatherData }) => {
+const Layout = ({ onCitySelect, weatherData, loading }) => {
   const [isOpen, setisOpen] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
@@ -36,6 +36,7 @@ const Layout = ({ onCitySelect, weatherData }) => {
           isOpen={isOpen}
           handleToggle={handleToggle}
           isChecked={isChecked}
+          loading={loading}
         />
         <div className={`page-content ${isChecked ? 'bg-light' : 'bg-dark'}`}>
           <Outlet />

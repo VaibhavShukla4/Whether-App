@@ -1,6 +1,7 @@
 /** @format */
 
 import React from 'react';
+import CardSkeleton from '../CardSkeleton';
 
 const WeatherInfo = ({ weatherData }) => {
   if (
@@ -8,7 +9,7 @@ const WeatherInfo = ({ weatherData }) => {
     !weatherData.weather ||
     weatherData.weather.length === 0
   ) {
-    return <p>Loading weather data...</p>;
+    return <CardSkeleton />;
   }
 
   const { weather, main, name } = weatherData;
